@@ -1,11 +1,16 @@
+POST http://localhost:4111/api/v1/auth/login
+Content-Type: application/json
+{
+  "username": "admin",
+  "password": "admin"
+}
 ### Get auth token
 ### Admin token: Authorization: Basic YWRtaW46YWRtaW4=
 POST http://localhost:4111/api/v1/auth/login
 Content-Type: application/json
-
 {
-  "username": "kate200011",
-  "password": "Kate2000#"
+  "username": "kate19981",
+  "password": "Kate19981!"
 }
 
 ### Positive test: Admin can create new user with correct data
@@ -14,8 +19,8 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "kate19982",
-  "password": "Kate1998!1",
+  "username": "kate19988",
+  "password": "Kate19988!",
   "role": "USER"
 }
 
@@ -25,8 +30,8 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": " ",
-  "password": "QWer456&#",
+  "username": "   ",
+  "password": "{{$random.alphanumeric(10)}}@",
   "role": "USER"
 }
 
@@ -37,7 +42,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 {
   "username": "ab",
-  "password": "UpLow123@",
+  "password": "{{$random.alphanumeric(10)}}#",
   "role": "USER"
 }
 
@@ -48,7 +53,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 {
   "username": "abcdefghijklmnop",
-  "password": "UpLow123@",
+  "password": "{{$random.alphanumeric(10)}}%",
   "role": "USER"
 }
 
@@ -59,7 +64,7 @@ Authorization: Basic YWRtaW46YWRtaW4=
 
 {
   "username": "$%^&*()@#",
-  "password": "UpLow123@",
+  "password": "{{$random.alphanumeric(10)}}^",
   "role": "USER"
 }
 
@@ -69,8 +74,8 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "{{$random.uuid}}",
-  "password": "  ",
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": " ",
   "role": "USER"
 }
 
@@ -80,23 +85,63 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "Misha1955",
+  "username": "{{$random.alphanumeric(10)}}",
   "password": "Aa1234&",
   "role": "USER"
 }
 
 ### Negative test: Admin can not create new user with password without digits
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "Aa&bbbbb",
+  "role": "USER"
+}
+
 ### Negative test: Admin can not create new user with password without one lower case character
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "AAA&12345",
+  "role": "USER"
+}
+
 ### Negative test: Admin can not create new user with password without one upper case character
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "abc45678$",
+  "role": "USER"
+}
+
 ### Negative test: Admin can not create new user with password without special character
+POST http://localhost:4111/api/v1/admin/users
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4=
+
+{
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "Aab45678",
+  "role": "USER"
+}
+
 ### Negative test: Admin can not create new user with password with spaces
 POST http://localhost:4111/api/v1/admin/users
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "{{$random.uuid}}",
-  "password": "Aa&bbbbb",
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "Qwerty1 #",
   "role": "USER"
 }
 
@@ -106,11 +151,10 @@ Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4=
 
 {
-  "username": "username",
-  "password": "Aa&12345",
+  "username": "{{$random.alphanumeric(10)}}",
+  "password": "{{$random.alphanumeric(10)}}!",
   "role": "EDITOR"
 }
-
 
 ### Negative test: Create user that already exists
 POST http://localhost:4111/api/v1/admin/users
@@ -126,9 +170,9 @@ Authorization: Basic YWRtaW46YWRtaW4=
 ### Positive test: Authorized user can create account
 POST http://localhost:4111/api/v1/accounts
 Content-Type: application/json
-Authorization: Basic a2F0ZTE5OTgxOkthdGUxOTk4ITE=
+Authorization: Basic a2F0ZTE5OTg4OkthdGUxOTk4OCE=
 
-### Positive test: Cneck account was created
+### Positive test: Check account was created
 GET http://localhost:4111/api/v1/customer/accounts
 Content-Type: application/json
-Authorization: Basic a2F0ZTE5OTgxOkthdGUxOTk4ITE=
+Authorization: Basic a2F0ZTE5OTg4OkthdGUxOTk4OCE=
