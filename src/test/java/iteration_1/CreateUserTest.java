@@ -52,8 +52,8 @@ public class CreateUserTest extends BaseTest {
                 .role(role)
                 .build();
 
-        new AdminCreateUserRequester(RequestSpecs.adminSpec(),
-                ResponseSpecs.requestReturnsBadRequest(errorKey, errorValue))
-                .post(createUserRequest);
+            new AdminCreateUserRequester(RequestSpecs.adminSpec(),
+                    ResponseSpecs.requestReturnsBadRequest(errorKey, errorValue))
+                    .post(createUserRequest);
     }
 }

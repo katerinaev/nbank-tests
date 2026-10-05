@@ -10,6 +10,7 @@ import specs.RequestSpecs;
 import specs.ResponseSpecs;
 
 public class CreateAccountTest {
+
     @Test
     public void userCanCreateAccountTest() {
         CreateUserRequest userRequest = CreateUserRequest.builder()
@@ -29,5 +30,6 @@ public class CreateAccountTest {
                 .post(null);
 
         // запросить все аккаунты пользователя и проверить, что наш аккаунт там
+
     }
 }
